@@ -1,0 +1,100 @@
+{% extends "AdminArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Doctor</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Doctor</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+                <form method="POST" action="{{ url_for('admin.doctor_post') }} " id="add-doctor">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="name">Doctor Name:</label>
+                                <input id="name" class="form-control form-control-alternative" type="text" name="name"
+                                    required placeholder="Enter Doctor Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input id="email" class="form-control form-control-alternative" type="email"
+                                    name="email" required placeholder="Enter Doctor Email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="NIC_no">NIC No:</label>
+                                <input id="NIC_no" class="form-control form-control-alternative" type="text"
+                                    name="NIC_no" required placeholder="Enter NIC no">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="exampleFormControlSelect1">Hospital Name</label>
+                                <select class="userrole form-control " name="hospital_id">
+                                    <option></option>
+                                    {% for hospital in hospitals %}
+                                    <option value="{{hospital.id}}" class="text-capitalize">{{hospital.name}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <span id="form-span"></span>
+                            <button id="submit-btn" type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+{% block js%}
+<script>
+    $(document).ready(function () {
+        $('.userrole').select2({
+            placeholder: "Select a hospital",
+            allowClear: true
+        });
+    });
+    $("#add-doctor").submit(function (event) {
+        
+        setLoader('#submit-btn', '#form-span')
+    });
+</script>
+
+{% endblock %}

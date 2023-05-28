@@ -1,0 +1,100 @@
+{% extends "ManagerArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Blood Request</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('manager.dashbord') }} "><i
+                            class="bx bx-home"></i></a></li>
+                            <li class="breadcrumb-item " aria-current="page">Best Blood Donors</li>
+                            <li class="breadcrumb-item active" aria-current="page">Best Blood Donors View</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Serial Number:</label> {{ BloodRequest.s_number }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Name:</label> {{ BloodRequest.name }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Distance :</label> 
+                                {{'%0.2f'|format(BloodRequest.distance|float)}} KM
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Status:</label> 
+                                {% if(BloodRequest.status=='false') %}
+                                <span class="badge badge-warning">Not Response</span>
+                                {% elif (BloodRequest.status=='not') %}
+                                <span class="badge badge-danger">Not Coming</span>
+                                {% else %}
+                                <span class="badge badge-success">Coming</span>
+                                {%endif%}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Donor weight:</label> 
+                                {{ BloodRequest.weight }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Time:</label> {{ BloodRequest.time }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Disease:</label> {{ BloodRequest.disease }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+
+{% block js%}
+
+
+{% endblock %}

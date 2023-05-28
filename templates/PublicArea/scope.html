@@ -1,0 +1,54 @@
+{% extends "PublicArea/Layout/base.html" %}
+
+{% block title %}
+<title>HEART | Scope</title>
+{% endblock %}
+{% block ogtitle %}
+<meta property="og:title" content="HEART | Scope" />
+{% endblock %}
+
+{% block content%}
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+    <div class="container">
+
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li>Scope</li>
+        </ol>
+        <h2>Scope</h2>
+
+    </div>
+</section>
+<!-- End Breadcrumbs -->
+
+{% include 'PublicArea/ScopePage/literature.html' %}
+{% include 'PublicArea/ScopePage/gap.html' %}
+{% include 'PublicArea/ScopePage/problem.html' %}
+{% include 'PublicArea/ScopePage/objectives.html' %}
+{% include 'PublicArea/ScopePage/methodology.html' %}
+{% include 'PublicArea/ScopePage/technologies.html' %}
+
+{% endblock %}
+
+{% block css%}
+<style>
+    .contact .info-box p {
+        font-size: 16px !important;
+    }
+
+    .center_img_new {
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: block;
+    }
+
+    .head-title {
+        font-size: 24px !important;
+        font-weight: bold !important;
+        color: #111111 !important;
+        transition: 0.3s !important;
+    }
+</style>
+{% endblock %}

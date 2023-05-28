@@ -1,0 +1,48 @@
+<div class="vertical-menu">
+    <div data-simplebar class="h-100 mt-3">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li>
+                    <a href="{{ url_for('manager.dashbord') }}" class=" waves-effect">
+                        <i class='bx bxs-dashboard'></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-title">Management</li>
+                <li>
+                    <a href="{{ url_for('manager.donor') }}" class=" waves-effect"> 
+                        <i class='bx bxs-user-detail' ></i>
+                        <span>Blood Donors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('manager.bestDonor') }}" class=" waves-effect">
+                        <i class='bx bxs-user'></i>
+                        <span>Best Blood Donors</span>
+                    </a>
+                </li>
+                <!-- <li>
+                    <a href="{{ url_for('manager.blooddemand') }}" class=" waves-effect">
+                        <i class="bx bx-calendar"></i>
+                        <span>Blood Store</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('manager.bloodcamp') }}" class=" waves-effect">
+                        <i class='bx bxl-medium-old'></i>
+                        <span>Blood Campaigns</span>
+                    </a>
+                </li> -->
+                <!-- <li>
+                    <a href="{{ url_for('manager.bloodRequest') }}" class=" waves-effect">
+                        <i class='fa fa-heart'></i>
+                        <span>Blood Request</span>
+                    </a>
+                </li> -->
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

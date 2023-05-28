@@ -1,0 +1,90 @@
+{% extends "AdminArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Blood Campaign</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Blood Campaign</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form method="POST" action="{{ url_for('admin.bloodcampaign_post') }} ">
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="name">Blood Campaign name:</label>
+                                <input id="name" class="form-control form-control-alternative" type="text" name="name"
+                                    required placeholder="Blood Campaign Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="OrganizedDate">OrganizedD ate:</label>
+                                <input id="OrganizedDate" class="form-control form-control-alternative" type="date"
+                                    name="OrganizedDate" required placeholder="Enter Organized Date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="address">Address:</label>
+                                <textarea name="address" id="address" cols="30" rows="5"
+                                    class="form-control form-control-alternative"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="submit-btn" type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+{% block js%}
+<script>
+    $(document).ready(function () {
+        $('.userrole').select2({
+            placeholder: "Select a User Role",
+            allowClear: true
+        });
+    });
+</script>
+
+{% endblock %}

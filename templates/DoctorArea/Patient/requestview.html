@@ -1,0 +1,85 @@
+{% extends "DoctorArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Patients</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('doctor.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Patients</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+                <form method="POST" action="{{ url_for('doctor.patient_post') }} ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                               <h5> <label for="name">Patient Name:</label> Sunil</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                               <h5> <label for="name">Dr. Name:</label> {{ current_user.name }}</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="blood_group">Blood Group:</label>
+                                <select class=" form-control " name="blood_group" required>
+                                    <option value="All" id="All">All</option>
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="address">Resoan:</label>
+                                <textarea name="address" id="address" cols="30" rows="5"
+                                    class="form-control form-control-alternative"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="submit-btn" type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}

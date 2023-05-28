@@ -1,0 +1,106 @@
+{% extends "ManagerArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Blood Donors List</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('manager.dashbord') }} ">
+                            <i class="bx bx-home"></i></a></li>
+
+                        <li class="breadcrumb-item " aria-current="page">
+                            <a href="{{ url_for('manager.bestDonor') }} ">Best Blood Donors</a>
+                        </li>
+                        <li class="breadcrumb-item " aria-current="page">
+                            <a href="{{ url_for('manager.bestDonorAdd') }} ">Select Best Blood Donors </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Blood Donors List</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="col-lg-6 col-5 text-right">
+
+                <form method="POST" action="{{ url_for('manager.donorSentSms') }} ">
+                    <input type="hidden" name="BloodReuests[]" value="{{BloodReuests}}">
+                    <input type="submit" class="btn btn-primary btn-sm " value="Send Message">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive ">
+
+                <table id="userdata" class="table align-items-center table-flush ">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">Serial Number</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Distance</th>
+                            <th class="text-center">Contact Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for BloodReuest in BloodReuests %}
+                        <tr>
+                            <td>
+                                {{BloodReuest.id}}
+                            </td>
+                            <td class="text-center">
+                                <strong>
+                                    {{BloodReuest.SerialNo}}
+                                </strong>
+                            </td>
+                            <td class="text-center">
+                                <strong>
+                                    {{BloodReuest.Name}}
+                                </strong>
+                            </td>
+                            <td class="text-center">
+                                <strong>
+                                    {{'%0.2f'|format(BloodReuest.Distance|float)}} KM
+                                </strong>
+                            </td>
+                            <td class="text-center">
+                                <strong>
+                                    {{BloodReuest.Contact}}
+                                </strong>
+                            </td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+
+{% block js%}
+<script>$(document).ready(function () {
+        $("#userdata").DataTable({
+            language: {
+                paginate: {
+                    next: '<i class="fa fa-arrow-right"></i>',
+                    previous: '<i class="fa fa-arrow-left"></i>'
+                }
+            },
+            "bStateSave": false,
+            buttons: ["csv"]
+        }).buttons().container().appendTo("#userdata_wrapper .col-md-6:eq(0)")
+    });
+</script>
+
+{% endblock %}

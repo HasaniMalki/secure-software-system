@@ -1,0 +1,107 @@
+{% extends "AdminArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Donors</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Donors</li>
+                    </ol>
+                </nav>
+            </div>
+            <a href="{{ url_for('admin.donorAdd') }} " class="btn btn-primary btn-sm float-right">
+                <i class=" fa fa-plus"></i> Add New
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive ">
+
+                <table id="userdata" class="table align-items-center table-flush ">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Donor name</th>
+                            <th class="text-center">Donor gender</th>
+                            <th class="text-center" >Blood group</th>
+                        </tr>
+                    </thead>
+                    <tbody >
+                        {% for donor in donors %}
+                        <tr>
+                            <td>
+                                {{donor.id}}
+                            </td>
+                            <td class="text-center">
+                                <strong> {{donor.email}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong> {{donor.fullname}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong> {{donor.gender}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong>{{donor.blood_group}}</strong>
+                            </td>
+                            <!-- <td>
+                                <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <a class="dropdown-item" href=""
+                                            target="_blank">
+                                            <i class="fas fa-desktop sidebaricon"></i>&nbsp;View
+                                        </a>
+                                        <a class="dropdown-item"
+                                            href="">
+                                            <i class="fas fa-edit sidebaricon"></i>&nbsp;Edit
+                                        </a>
+                                        
+                                    </div>
+                                </div>
+                            </td> -->
+                        </tr>
+                        {%endfor%}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+
+{% block js%}
+<script>$(document).ready(function () {
+        $("#userdata").DataTable({
+            language: {
+                paginate: {
+                    next: '<i class="fa fa-arrow-right"></i>',
+                    previous: '<i class="fa fa-arrow-left"></i>'
+                }
+            },
+            "bStateSave": true,
+            buttons: ["csv"]
+        }).buttons().container().appendTo("#userdata_wrapper .col-md-6:eq(0)")
+    });
+</script>
+
+{% endblock %}

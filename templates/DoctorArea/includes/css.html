@@ -1,0 +1,85 @@
+<!-- DataTables -->
+<link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='MemberArea/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='MemberArea/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}">
+
+<!-- Responsive datatable examples -->
+<link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='MemberArea/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+
+<!-- Bootstrap Css -->
+<link id="bootstrap-style" rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='MemberArea/assets/css/bootstrap.min.css') }}">
+<!-- Icons Css -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='MemberArea/assets/css/icons.min.css') }}">
+<!-- App Css-->
+<link id="app-style" rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='MemberArea/assets/css/app.min.css') }}">
+
+<!-- select2 -->
+<link id="app-style" rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='MemberArea/assets/css/select2.min.css') }}">
+<style>
+        .margin-center {
+                margin: 0 auto;
+        }
+
+        .select2-container .select2-selection--single {
+                   height: 50px !important;
+        }
+        .select2-container--default .select2-selection--single {
+                background-color: #fff;
+                border-radius: 4px;
+                height: calc(2.75rem + 2px);
+                box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+                border: 0;
+                transition: box-shadow .15s ease;
+                line-height: 1.5rem;
+                font-size: 0.875rem;
+                padding: 0.625rem 0.75rem;
+        }
+
+        .select2-dropdown {
+                box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+                border: 0;
+                transition: box-shadow .15s ease;
+        }
+
+
+        .select2-container--default .select2-selection--single .select2-selection__arrow b {
+                margin-top: 6px;
+        }
+
+        .select2-selection.select2-selection--single {
+                transition: box-shadow .15s ease;
+                border: 0;
+                box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
+                font-size: .875rem;
+                height: calc(1.5em + 1.25rem + 5px);
+                line-height: 1.875rem;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+                background-color: #fff;
+                border-radius: 4px;
+                box-shadow: 0 1px 3px rgba(50, 50, 93, 0.15), 0 1px 0 rgba(0, 0, 0, 0.02);
+                border: 0;
+                transition: box-shadow .15s ease;
+                line-height: 1.5rem;
+                font-size: 0.875rem;
+                padding: 0.625rem 0.75rem;
+        }
+
+        .select2-container--default .select2-selection--multiple .select2-selection__arrow b {
+                margin-top: 6px;
+        }
+
+        .select2-selection.select2-selection--multiple {
+                transition: box-shadow .15s ease;
+                border: 0;
+                box-shadow: 0 1px 3px rgba(50, 50, 93, .15), 0 1px 0 rgba(0, 0, 0, .02);
+                font-size: .875rem;
+                line-height: 1.875rem;
+        }
+</style>

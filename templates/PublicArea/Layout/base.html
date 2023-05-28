@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    {% block title %}
+    {% endblock %}
+    {% block ogtitle %}
+    {% endblock %}
+    <meta name="description" content="HEART smart blood bank management system" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ url_for('static', filename='PublicArea/assets/img/icon.jpg') }}" />
+    <meta property="og:image:secure_url" content="{{ url_for('static', filename='PublicArea/assets/img/icon.jpg') }}" />
+    <meta property="og:image:width" content="500" />
+    <meta property="og:image:height" content="300" />
+
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='PublicArea/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ url_for('static', filename='PublicArea/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+
+    <style>
+        .min_hi_15 {
+            min-height: 15vh !important;
+        }
+    </style>
+
+
+    {% block css%}
+    {% endblock %}
+    {% include 'PublicArea/includes/css.html' %}
+    {{ toastr.include_jquery() }}
+    {{ toastr.include_toastr_css() }}
+    {{ toastr.message() }}
+
+    {% set curr_url = request.path %}
+
+<body>
+
+    <!-- ======= Header ======= -->
+    {% block contentnav%}
+    {% include 'PublicArea/includes/nav.html' %}
+    {% endblock %}
+    <!-- End Header -->
+
+    <!-- ======= Hero Section ======= -->
+
+    {% block contenthero %}
+    {% endblock %}
+    <!-- End Hero -->
+
+    <main id="main">
+        {% block content %}
+        {% endblock %}
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    {% block contentfooter%}
+    {% include 'PublicArea/includes/footer.html' %}
+    {% endblock %}
+
+    <!-- End Footer -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+    {% include 'PublicArea/includes/js.html' %}
+    {{ toastr.include_toastr_js() }}
+    {% block js%}
+    {% endblock %}
+</body>
+
+</html>

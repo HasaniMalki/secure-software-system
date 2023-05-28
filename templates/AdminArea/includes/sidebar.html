@@ -1,0 +1,48 @@
+<div class="vertical-menu">
+    <div data-simplebar class="h-100">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li>
+                    <a href="{{ url_for('admin.dashbord') }}" class=" waves-effect">
+                        <i class='bx bxs-dashboard'></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-title">User</li>
+                <li>
+                    <a href="{{ url_for('admin.user') }}" class=" waves-effect">
+                        <i class="bx bx-user"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('admin.doctor') }}" class=" waves-effect">
+                        <i class="fa fa-medkit" aria-hidden="true"></i>
+                        <span>Doctors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('admin.donor') }}" class=" waves-effect">
+                        <i class='bx bxs-user-detail'></i>
+                        <span>Donors</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('admin.hospital') }}" class=" waves-effect">
+                        <i class='bx bx-plus-medical'></i>
+                        <span>Hospital</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('admin.bloodcampaign') }}" class=" waves-effect">
+                        <i class='bx bxl-medium-old' ></i>
+                        <span>Blood Campaign</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

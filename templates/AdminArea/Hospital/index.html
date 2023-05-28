@@ -1,0 +1,99 @@
+{% extends "AdminArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Hospital</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Hospital</li>
+                    </ol>
+                </nav>
+            </div>
+            <a href="{{ url_for('admin.hospitalAdd') }} " class="btn btn-primary btn-sm float-right">
+                <i class=" fa fa-plus"></i> Add New
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive ">
+
+                <table id="userdata" class="table align-items-center table-flush ">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">Hospital name</th>
+                            <th class="text-center">Hospital contact_no</th>
+                            <th class="text-center">Hospital address</th>
+                            <th class="text-center">Contract address</th>
+                            <th class="text-center">Hash</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hospital in hospitals %}
+                        <tr>
+                            <td>
+                                {{hospital.id}}
+                            </td>
+                            <td class="text-center">
+                                <strong> {{hospital.name}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong> {{hospital.contact_no}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong> {{hospital.address}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn "
+                                    href="https://rinkeby.etherscan.io/address/{{hospital.contract_address}}"
+                                    target="_blank">
+                                    <i class='bx bx-link-external'></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn  " href="https://rinkeby.etherscan.io/tx/{{hospital.tx_hash}}"
+                                    target="_blank">
+                                    <i class="fa fa-link" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {%endfor%}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+
+{% block js%}
+<script>$(document).ready(function () {
+        $("#userdata").DataTable({
+            language: {
+                paginate: {
+                    next: '<i class="fa fa-arrow-right"></i>',
+                    previous: '<i class="fa fa-arrow-left"></i>'
+                }
+            },
+            "bStateSave": true,
+            buttons: ["csv"]
+        }).buttons().container().appendTo("#userdata_wrapper .col-md-6:eq(0)")
+    });
+</script>
+
+{% endblock %}

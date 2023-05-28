@@ -1,0 +1,118 @@
+{% extends "DoctorArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Blood Request</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('doctor.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Blood Request</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Doctor Name:</label> Dr. {{ bloodRequest.dname }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Patient Name:</label> {{ bloodRequest.pname }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Blood Type:</label> {{ bloodRequest.bloodtype }}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Status:</label> {% if(bloodRequest.status=='false') %}
+                                <span class="badge badge-danger">Not yet</span>
+                                {% else %}
+                                <span class="badge badge-success">Delivered</span>
+                                {%endif%}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">DNI No:</label>
+                                {% if(bloodRequest.dinNo=='') %}
+                                <span class="badge badge-danger">Not yet</span>
+                                {% else %}
+                                {{ bloodRequest.dinNo }}
+                                {%endif%}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">TX hash:</label>
+                                <a class="btn  " href="https://rinkeby.etherscan.io/tx/{{bloodRequest.tx_hash}}"
+                                    target="_blank">
+                                    {{bloodRequest.tx_hash}} <i class="fa fa-link" aria-hidden="true"></i>
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h5> <label for="name">Reason:</label> </h5>
+                        <h5>{{ bloodRequest.reason }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if(bloodRequest.dinNo!='') %}
+        <div class="card">
+            <div class="card-body center">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group text-capitalize">
+                            <h5> <label for="name">Blood packet TX hash:</label>
+                                <a class="btn  " href="https://rinkeby.etherscan.io/tx/{{bloodRequest.pk_tx_hash}}"
+                                    target="_blank">
+                                    {{bloodRequest.pk_tx_hash}} <i class="fa fa-link" aria-hidden="true"></i>
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {%endif%}
+    </div> <!-- end col -->
+</div>
+{% endblock %}

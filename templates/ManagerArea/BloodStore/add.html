@@ -1,0 +1,107 @@
+{% extends "ManagerArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Donors</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">
+                            <a href="{{ url_for('manager.dashbord') }} ">
+                                <i class="bx bx-home"></i>
+                            </a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Donor</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <h3 class="text-danger">Coming Soon</h3>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+                <form method="POST" action="{{ url_for('manager.donor_post') }} ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class=" form-group text-capitalize">
+                                <label for="NIC_no">Donor NIC:</label>
+                                <select class="donor-select form-control " name="NIC_no" required>
+                                    <option value=""></option>
+                                    {% for donor in donors %}
+                                    <option value="{{donor.NIC_no}}" id="{{donor.NIC_no}}">{{donor.NIC_no}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="contact_no">Contact No:</label>
+                                <input id="contact_no" class="form-control form-control-alternative" type="text"
+                                    name="contact_no" required placeholder="Enter Contact No">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="submit-btn" type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> 
+</div>
+{% endblock %}
+{% block css%}
+<style>
+    .select2-selection.select2-selection--single {
+        display: block;
+        width: 100%;
+        height: calc(0.8em + .7rem + 2px);
+        padding: .47rem .75rem;
+        font-size: .825rem;
+        font-weight: 400;
+        line-height: 0.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 40px !important;
+    }
+</style>
+{% endblock %}
+{% block js%}
+<script>
+    $(document).ready(function () {
+
+        $('.donor-select').select2({
+            placeholder: "Select a User NIC",
+            allowClear: true
+        });
+        $('.userrole').select2({
+            placeholder: "Select a User Role",
+            allowClear: true
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,232 @@
+{% extends "ManagerArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Blood Donors</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('manager.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                                    <li class="breadcrumb-item " aria-current="page">Blood Donors</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Edit</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+                <form method="POST" action="{{ url_for('manager.donor_update_post') }} ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="fullname">Full Name:</label>
+                                <input type="hidden" name="id" value="{{donor.id}}">
+                                <input id="fullname" class="form-control form-control-alternative" type="text"
+                                    name="fullname" required placeholder="Enter Full Name" value="{{donor.fullname}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input id="email" class="form-control form-control-alternative" type="email"
+                                    name="email" required placeholder="Enter User Email" value="{{donor.email}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="NIC_no">NIC No:</label>
+                                <input id="NIC_no" class="form-control form-control-alternative" type="text"
+                                    name="NIC_no" required placeholder="Enter NIC No" value="{{donor.NIC_no}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="birthday">Birthday:</label>
+                                <input id="birthday" class="form-control form-control-alternative" type="date"
+                                    name="birthday" required placeholder="Enter Birthday"  value="{{donor.birthday}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="exampleFormControlSelect1">Gender:</label>
+                                <select class=" form-control " name="gender" >
+
+                                    {% if (donor.gender=='male') %}
+                                    <option value="male" class="text-capitalize " selected>Male</option>
+                                    <option value="female" class="text-capitalize" >Female</option>
+                                    {% else %}
+                                    <option value="male" class="text-capitalize " >Male</option>
+                                    <option value="female" class="text-capitalize" selected>Female</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="weight">Weight:</label>
+                                <input id="weight" class="form-control form-control-alternative" type="text"
+                                    name="weight" required placeholder="Enter Weight" value="{{donor.weight}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="height">Height:</label>
+                                <input id="height" class="form-control form-control-alternative" type="text"
+                                    name="height" required placeholder="Enter Height" value="{{donor.height}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="blood_group">Blood Group:</label>
+                                <select class=" form-control " name="blood_group" >
+                                    <option value="">Select Blood Group </option>
+
+                                    {% if (donor.blood_group=='A+') %}
+                                    <option value="A+" id="A+" selected>A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='A-') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-" selected>A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='B+') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+" selected>B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='B-') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-" selected>B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='O+') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+" selected>O+</option>
+                                    <option value="O-" id="O-" >O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='O-') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-" selected>O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='AB+') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+"selected>AB+</option>
+                                    <option value="AB-" id="AB-">AB-</option>
+                                    {% elif (donor.blood_group=='AB-') %}
+                                    <option value="A+" id="A+">A+</option>
+                                    <option value="A-" id="A-">A-</option>
+                                    <option value="B+" id="B+">B+</option>
+                                    <option value="B-" id="B-">B-</option>
+                                    <option value="O+" id="O+">O+</option>
+                                    <option value="O-" id="O-">O-</option>
+                                    <option value="AB+" id="AB+">AB+</option>
+                                    <option value="AB-" id="AB-" selected>AB-</option>
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="contact_no">Contact No:</label>
+                                <input id="contact_no" class="form-control form-control-alternative" type="text"
+                                    name="contact_no" required placeholder="Enter Contact No" value="{{donor.contact_no}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="address">Address:</label>
+                                <textarea name="address" id="address" cols="30" rows="5"
+                                    class="form-control form-control-alternative">{{donor.address}} </textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="submit-btn" type="submit" class="btn btn-primary">
+                                Update
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+{% block js%}
+<script>
+    $(document).ready(function () {
+        $('.userrole').select2({
+            placeholder: "Select a User Role",
+            allowClear: true
+        });
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 d-flex align-items-center">
+                <!-- <h1 class="logo mr-auto"><a href="/">HEART</a></h1> -->
+                <!-- Uncomment below if you prefer to use an image logo -->
+                <a href="/" class="logo mr-auto"><img src="static/PublicArea/assets/img/logo.png" alt=""></a>
+
+                <nav class="nav-menu d-none d-lg-block">
+                    <ul>
+                        <li class="{%if curr_url=='/'%} active {% endif %}"><a
+                                href="{%if curr_url=='/'%}#{% else %}{{ url_for('main.index') }}{% endif %}">Home</a>
+                        </li>
+                        <li>
+                            <a href=" {%if curr_url=='/'%}#about{% else %}{{ url_for('main.index') }}#about{% endif %}">
+                                About Us</a>
+                        </li>
+
+                        <!-- <li class="drop-down {%if curr_url=='/scope'%} active {% endif %}"><a href="#">Scope</a>
+                            <ul>
+                                <li><a href="{%if curr_url=='scope'%}#literature{% else %}{{ url_for('main.scope') }}#literature{% endif %}">Literature Survey</a></li>
+                                <li><a href="{%if curr_url=='scope'%}#gap{% else %}{{ url_for('main.scope') }}#gap{% endif %}"> Research Gap </a></li>
+                                <li><a href="{%if curr_url=='scope'%}#problem{% else %}{{ url_for('main.scope') }}#problem{% endif %}"> Research Problem </a></li>
+                                <li><a href="{%if curr_url=='scope'%}#objectives{% else %}{{ url_for('main.scope') }}#objectives{% endif %}"> Research Objectives </a></li>
+                                <li><a href="{%if curr_url=='scope'%}#methodology{% else %}{{ url_for('main.scope') }}#methodology{% endif %}"> Methodology </a></li>
+                                <li><a href="{%if curr_url=='scope'%}#technologies{% else %}{{ url_for('main.scope') }}#technologies{% endif %}"> Technologies Used</a></li>
+                            </ul>
+                        </li>
+                        <li class="drop-down {%if curr_url=='/milestones'%} active {% endif %}"><a href="#">Milestones</a>
+                            <ul>
+                                <li><a href="{%if curr_url=='milestones'%}#proposal{% else %}{{ url_for('main.milestones') }}#proposal{% endif %}">Project Proposal</a></li>
+                                <li><a href="{%if curr_url=='milestones'%}#presentation-1{% else %}{{ url_for('main.milestones') }}#presentation-1{% endif %}">Progress Presentation 1</a></li>
+                                <li><a href="{%if curr_url=='milestones'%}#presentation-2{% else %}{{ url_for('main.milestones') }}#presentation-2{% endif %}">Progress Presentation 2</a></li>
+                                <li><a href="{%if curr_url=='milestones'%}#demo{% else %}{{ url_for('main.milestones') }}#demo{% endif %}">Demo</a></li>
+                                <li><a href="{%if curr_url=='milestones'%}#assessment{% else %}{{ url_for('main.milestones') }}#assessment{% endif %}">Final Assessment</a></li>
+                                <li><a href="{%if curr_url=='milestones'%}#viva{% else %}{{ url_for('main.milestones') }}#viva{% endif %}">Viva</a></li>
+                            </ul>
+                        </li> -->
+                        <!-- <li class="{%if curr_url=='/documents'%} active {% endif %}"><a href="{{ url_for('main.documents') }}">Documents</a></li> -->
+                        <!-- <li class="{%if curr_url=='/presentations'%} active {% endif %}"><a href="{{ url_for('main.presentations') }}">Presentations</a></li> -->
+                        <li><a
+                                href="{%if curr_url=='/'%}#contact{% else %}{{ url_for('main.index') }}#contact{% endif %}">Contact
+                                Us</a></li>
+                        {% if current_user.is_authenticated %}
+                        <li class="drop-down"><a href="#">{{ current_user.name }}</a>
+                            <ul>
+                                <li> <a href="{{ url_for('main.dashbord') }}">Dashbord</a></li>
+                                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if not current_user.is_authenticated %}
+                        <li>
+                            <a href="{{ url_for('auth.login') }}"
+                                class="btn  text-center btn-circle btn-lg  text-white btn-danger-2 "
+                                style="margin-top: -0.5rem;">
+                                Login</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </nav><!-- .nav-menu -->
+            </div>
+        </div>
+
+    </div>
+</header>
+<!-- End Header -->

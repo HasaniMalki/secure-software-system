@@ -1,0 +1,182 @@
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        setblood();
+    });
+
+    function setblood() {
+        var valuegroup=getCookie('bloodgrop');
+        if (valuegroup==null) {
+            valuegroup='All';
+        }
+        document.getElementById("bloodgrop").value=valuegroup;
+        $('.blood-select').select2();
+    }
+
+    function selctblood() {
+        var valuegroup=document.getElementById("bloodgrop").value;
+        setCookie('bloodgrop', valuegroup, 180);
+    }
+
+
+    $(function () {
+        var rangeselect = getCookie('filterRange');
+        var start = moment();
+        var end = moment();
+        if (rangeselect == null) {
+            rangeselect = 'Today';
+        }
+        switch (rangeselect) {
+            case 'Tomorrow':
+                start = moment().add(1, 'days');
+                end = moment().add(1, 'days');
+                break;
+            case 'Next 7 Days':
+                start = moment();
+                end = moment().add(6, 'days');
+                break;
+            case 'Last Month':
+                start = moment().subtract(1, 'month').startOf('month');
+                end = moment().subtract(1, 'month').endOf('month');
+                break;
+            case 'This Month':
+                start = moment().startOf('month');
+                end = moment().endOf('month');
+                break;
+            case 'Last Year':
+                start = moment().subtract(1, 'years');
+                end = moment();
+                break;
+            case 'Next Year':
+                start = moment();
+                end = moment().add(1, 'years');
+                break;
+            case 'Custom Range':
+                rangeselect = 'Today';
+                break;
+        }
+
+        setCookie('filterStart', start.format('MMMM D, YYYY'), 180);
+        setCookie('filterEnd', end.format('MMMM D, YYYY'), 180);
+        var ranges = rangeselect;
+        function cb(start, end, ranges) {
+            if ((ranges == "Today") || (ranges == "Tomorrow")) {
+                $('#reportrange span').html(ranges + ' (' + start.format('MMMM D, YYYY') + ')');
+            }
+            else {
+                $('#reportrange span').html(ranges + ' (' + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY') + ')');
+            }
+            setCookie('filterRange', ranges, 180);
+            setCookie('filterStart', start.format('MMMM D, YYYY'), 180);
+            setCookie('filterEnd', end.format('MMMM D, YYYY'), 180);
+        }
+
+        $('#reportrange').daterangepicker({
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'Today': [moment(), moment()],
+                'Tomorrow': [moment().add(1, 'days'), moment().add(1, 'days')],
+                'Next 7 Days': [moment(), moment().add(6, 'days')],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'Last Year': [moment().subtract(1, 'years'), moment()],
+                'Next Year': [moment(), moment().add(1, 'years')],
+            }
+        }, cb);
+
+        cb(start, end, ranges);
+    });
+
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
+
+    function getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
+</script>
+<!-- Chart code -->
+<script>
+
+    am4core.ready(function () {
+        var dateLists = [];
+
+        {% for dateLists in dateList %}
+            dateLists.push('{{dateLists}}');
+        {% endfor %}
+
+        var DataLists = [];
+        {% for Datas in Data %}
+            DataLists.push('{{Datas}}');
+        {% endfor %}
+
+        var DataFLists = [];
+        DataFLists.push( Math.round('{{P1}}'));
+        DataFLists.push( Math.round('{{P2}}'));
+        DataFLists.push( Math.round('{{P3}}'));
+        DataFLists.push( Math.round('{{P4}}'));
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+        console.log(DataLists.length);
+        console.log(dateLists.length);
+
+        var chart = am4core.create("chartdiv", am4charts.XYChart);
+        chart.logo.disabled = true;
+
+        var data = [];
+        var f=0;
+        var value = 500;
+        for (var i = 800; i < dateLists.length; i++) {
+            data.push({ date: dateLists[i], value: DataLists[i] });
+            if ( DataLists[i]==null) {
+                data.push({ date: dateLists[i], value:DataFLists[f] });
+                f=f+1;
+            }
+        }
+
+        chart.data = data;
+
+        // Create axes
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        dateAxis.renderer.minGridDistance = 60;
+
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+        // Create series
+        var series = chart.series.push(new am4charts.LineSeries());
+        series.dataFields.valueY = "value";
+        series.dataFields.dateX = "date";
+        series.tooltipText = "{value}"
+
+        series.tooltip.pointerOrientation = "vertical";
+
+        chart.cursor = new am4charts.XYCursor();
+        chart.cursor.snapToSeries = series;
+        chart.cursor.xAxis = dateAxis;
+
+        //chart.scrollbarY = new am4core.Scrollbar();
+        chart.scrollbarX = new am4core.Scrollbar();
+
+    }); // end am4core.ready()
+
+</script>

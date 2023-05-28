@@ -1,0 +1,195 @@
+{% extends "ManagerArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Best Blood Donors</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('manager.dashbord') }} ">
+                            <i class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item " aria-current="page"><a href="{{ url_for('manager.bestDonor') }} ">Best Blood Donors</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Select Best Blood Donors</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-lg-6  margin-center">
+        <div class="card">
+            <div class="card-body center">
+                <form method="POST" action="{{ url_for('manager.bestDonor_post') }} ">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Hospital Name</label>
+                                <select class="hospitals form-control form-control-lg" name="hospital_id" required>
+                                    <option></option>
+
+                                    {% for hospital in hospitals %}
+                                    <option value="{{hospital.SerialNo}}">{{hospital.name}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="blood_group">Blood Group:</label>
+                                <select class=" form-control " name="blood_group" required>
+                                    <option value="">Select Blood Group</option>
+                                    <option value="AP" id="A+">A+</option>
+                                    <option value="AN" id="A-">A-</option>
+                                    <option value="BP" id="B+">B+</option>
+                                    <option value="BN" id="B-">B-</option>
+                                    <option value="OP" id="O+">O+</option>
+                                    <option value="ON" id="O-">O-</option>
+                                    <option value="ABP" id="AB+">AB+</option>
+                                    <option value="ABN" id="AB-">AB-</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="stage">Stage:</label>
+                                <select class=" form-control " name="stage" required>
+                                    <option value="">Select Stage</option>
+                                    <option value="1" id="A+">1</option>
+                                    <option value="2" id="A-">2</option>
+                                    <option value="3" id="B+">3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="number_of_donnors">No Of Donors:</label>
+                                <input id="number_of_donnors" class="form-control form-control-alternative" type="text"
+                                    name="number_of_donnors" required placeholder="Enter No Of Donor" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group text-capitalize">
+                                <label for="reason">Reason:</label>
+                                <textarea name="reason" id="reason" cols="30" rows="5"
+                                    class="form-control form-control-alternative" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button id="submit-btn" type="submit" class="btn btn-primary">
+                                Find
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+<div class="row">
+    <div class="col-12">
+        <!-- HTML -->
+        <div id="chartdiv"></div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js%}
+<script>
+    $(document).ready(function () {
+        $('.hospitals').select2({
+            placeholder: "Select Hospital",
+            allowClear: true
+        });
+    });
+</script>
+<!-- Styles -->
+<style>
+    #chartdiv {
+        width: 100%;
+        height: 500px;
+    }
+</style>
+
+<!-- Resources -->
+<script src="https://cdn.amcharts.com/lib/4/core.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
+
+<!-- Chart code -->
+<script>
+    am4core.ready(function () {
+
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        var chart = am4core.create("chartdiv", am4charts.PieChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+
+        chart.data = [
+            {
+                country: "A+",
+                value: '{{count_list[1]}}'
+            },
+            {
+                country: "B+",
+                value: '{{count_list[2]}}'
+            },
+            {
+                country: "O+",
+                value: '{{count_list[3]}}'
+            },
+            {
+                country: "AB+",
+                value: '{{count_list[4]}}'
+            },
+            {
+                country: "Other",
+                value: '{{count_list[5]}}'
+            }
+        ];
+        chart.radius = am4core.percent(70);
+        chart.innerRadius = am4core.percent(40);
+        chart.startAngle = 180;
+        chart.endAngle = 360;
+
+        chart.logo.disabled = true;
+
+        var series = chart.series.push(new am4charts.PieSeries());
+        series.dataFields.value = "value";
+        series.dataFields.category = "country";
+
+        series.slices.template.cornerRadius = 10;
+        series.slices.template.innerCornerRadius = 7;
+        series.slices.template.draggable = true;
+        series.slices.template.inert = true;
+        series.alignLabels = false;
+
+        series.hiddenState.properties.startAngle = 90;
+        series.hiddenState.properties.endAngle = 90;
+
+        chart.legend = new am4charts.Legend();
+
+    }); // end am4core.ready()
+</script>
+
+{% endblock %}

@@ -1,0 +1,107 @@
+{% extends "DoctorArea/Layout/base.html" %}
+
+{% block hedercontent%}
+<div class="row  py-4">
+    <div class="col-12">
+        <div class="page-title-box d-flex align-items-center justify-content-between">
+
+            <div class="col-lg-6 col-7">
+                <h6 class="h2 text-dark d-inline-block mb-0">Blood Request</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-block mt-2">
+                    <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item"><a href="{{ url_for('admin.dashbord') }} "><i
+                                    class="bx bx-home"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Blood Request</li>
+                    </ol>
+                </nav>
+            </div>
+            <a href="{{ url_for('doctor.bloodRequestAdd') }} " class="btn btn-primary btn-sm float-right">
+                <i class=" fa fa-plus"></i> New Blood Request
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block pagecontent%}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body table-responsive ">
+
+                <table id="userdata" class="table align-items-center table-flush ">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th class="text-center">NIC No</th>
+                            <th class="text-center">Patient Name</th>
+                            <th class="text-center">Blood Group</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for bloodRequest in bloodRequests %}
+                        <tr>
+                            <td>
+                                {{bloodRequest.id}}
+                            </td>
+                            <td class="text-center">
+                                <strong> {{bloodRequest.pnic}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong> {{bloodRequest.pname}}</strong>
+                            </td>
+                            <td class="text-center">
+                                <strong> {{bloodRequest.bloodtype}}</strong>
+                            </td>
+                            <td class="text-center">
+                                {% if(bloodRequest.status=='false') %}
+                                <span class="badge badge-danger">Not yet</span>
+                                {% else %}
+                                <span class="badge badge-success">Delivered</span>
+                                {%endif%}
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only " href="#" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        <i class='bx bxs-cog'></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                        <a class="dropdown-item"
+                                            href="{{ url_for('doctor.bloodrequestView',id=bloodRequest.id) }} ">
+                                            <i class="fas fa-desktop sidebaricon"></i>&nbsp;View
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {%endfor%}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div> <!-- end col -->
+</div>
+{% endblock %}
+
+{% block js%}
+<script>$(document).ready(function () {
+        $("#userdata").DataTable({
+            language: {
+                paginate: {
+                    next: '<i class="fa fa-arrow-right"></i>',
+                    previous: '<i class="fa fa-arrow-left"></i>'
+                }
+            },
+            "bStateSave": true,
+            buttons: ["csv"]
+        }).buttons().container().appendTo("#userdata_wrapper .col-md-6:eq(0)")
+    });
+</script>
+
+{% endblock %}

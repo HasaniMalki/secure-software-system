@@ -1,0 +1,30 @@
+<div class="vertical-menu">
+    <div data-simplebar class="h-100">
+        <!--- Sidemenu -->
+        <div id="sidebar-menu">
+            <!-- Left Menu Start -->
+            <ul class="metismenu list-unstyled" id="side-menu">
+                <li>
+                    <a href="{{ url_for('doctor.dashbord') }}" class=" waves-effect">
+                        <i class='bx bxs-dashboard'></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-title">User</li>
+                <li>
+                    <a href="{{ url_for('doctor.patient') }}" class=" waves-effect">
+                        <i class="bx bx-user"></i>
+                        <span>Patient</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('doctor.bloodRequest') }}" class=" waves-effect">
+                        <i class='fa fa-heart'></i>
+                        <span>Blood Request</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- Sidebar -->
+    </div>
+</div>

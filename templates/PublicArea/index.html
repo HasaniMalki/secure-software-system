@@ -1,0 +1,47 @@
+{% extends "PublicArea/Layout/base.html" %}
+
+{% block title %}
+<title>HEART | Home</title>
+{% endblock %}
+{% block ogtitle %}
+<meta property="og:title" content="HEART Home" />
+{% endblock %}
+{% block contenthero %}
+{% include 'PublicArea/Homepage/hero.html' %}
+{% endblock %}
+
+{% block content%}
+{% include 'PublicArea/Homepage/count.html' %}
+{% include 'PublicArea/Homepage/about.html' %}
+{% include 'PublicArea/Homepage/contact.html' %}
+{% endblock %}
+
+{% block js%}
+<script>
+    $(document).ready(function () {
+      $("#img_viewer").css("width", $("#team_img").width());
+    });
+    // Navigation active state on scroll
+    var nav_sections = $('section');
+    var main_nav = $('.nav-menu, .mobile-nav');
+
+    $(window).on('scroll', function () {
+      var cur_pos = $(this).scrollTop() + 200;
+
+      nav_sections.each(function () {
+        var top = $(this).offset().top,
+          bottom = top + $(this).outerHeight();
+
+        if (cur_pos >= top && cur_pos <= bottom) {
+          if (cur_pos <= bottom) {
+            main_nav.find('li').removeClass('active');
+          }
+          main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');
+        }
+        if (cur_pos < 300) {
+          $(".nav-menu ul:first li:first, .mobile-menu ul:first li:first").addClass('active');
+        }
+      });
+    });
+  </script>
+{% endblock %}
